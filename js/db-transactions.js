@@ -58,6 +58,16 @@
         });
     }
     
+    // COUNT all Questions for specified exp
+    function countQuizQuestions(expGroupNumber, expNumber, callBack){
+        db.transaction(function(tx){
+            tx.executeSql("SELECT COUNT(id) FROM ExpQuestions WHERE expGroupNumber = ?  AND expNumber = ?", [expGroupNumber, expNumber], function(tx, res){
+                result = res.rows.item(0);
+                callBack(result);
+            }, errorCB);
+        });
+    }
+    
     // GET all Answers to a specified Question
     function getQuizAnswers(questionId, callBack){        
         db.transaction(function(tx){

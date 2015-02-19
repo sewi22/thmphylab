@@ -12,8 +12,8 @@
         <!-- JS Libs -->
         <script src="js/jquery/jquery-2.1.3.min.js"></script>
         <script>
-            $(document).on("mobileinit" , function () {
-                $.mobile.toolbar.prototype.options.addBackBtn = true;
+            $(document).on("mobileinit" , function(){                
+                $.mobile.toolbar.prototype.options.addBackBtn = true;                    
             });
         </script>
         <script src="js/jquery/jquery.mobile-1.4.5.min.js"></script>        
@@ -36,7 +36,7 @@
         
         <!-- Experiment Liste -->
         <div data-role="page" id="expListPage">
-            <div id="expListHeader" data-role="header" data-position="fixed">
+            <div id="expListHeader" data-role="header" data-position="fixed" addBackBtn="false">
                 <h1 id="expListHeadline">Laborversuche</h1>
               	<div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
                     <a href="#localStoragePage" class="headerLsButton" data-role="button" data-icon="star">LocalStorage</a>

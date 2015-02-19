@@ -6,12 +6,9 @@
         fillQuestionTables();            
     });
 
-    $(document).on("pagebeforecreate", "#startPage", function(e){                
-        $("#startContent").html("<p>THM PhyLab</p><img src='css/images/start-loader.gif'/>");                  
-    });
-    
-    
-    document.addEventListener("backbutton", function(e){
+
+    // Decisison if going back in history or exiting app by clicking the "Back Button"
+    $(document).on("click", "backbutton", function(e){
         if($.mobile.activePage.is('#expListPage')){
             navigator.app.exitApp();
         } else {
@@ -19,30 +16,48 @@
         }
     }, false);
     
-    // Change Values on Details Page with Parameters from List Item (Example: data-name)             
-    $(function setExpToLocalStorage(){
-        $('#expList').delegate('li a', 'click', function (){
-            localStorage.setItem("expGroupNumber", $(this).jqmData('expgroupnumber'));
-            localStorage.setItem("expNumber", $(this).jqmData('expnumber'));         
-        });
-    });
 
     // Open QR Code Reader and using callback values by scanning a QR Code Button
-    $(document).on('pagecreate', function(e) {        
-        $(".headerQrButton").click( function(){                      
-            var scanner = cordova.require("cordova/plugin/BarcodeScanner");
-            scanner.scan( function (result) {
-                alert("Scanner result: \n" +
-                "text: " + result.text + "\n" +
-                "format: " + result.format + "\n" +
-                "cancelled: " + result.cancelled + "\n");
-            },function (error) {
-                console.log("Scanning failed: ", error);
-            });
+    //$(document).on('pagecreate', function(e) {
+     //$(".headerQrButton").click( function(){
+    $(document).on("click", ".headerQrButton", function(){
+        var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+        scanner.scan( function (result) {
+            alert("Scanner result: \n" +
+            "text: " + result.text + "\n" +
+            "format: " + result.format + "\n" +
+            "cancelled: " + result.cancelled + "\n");
+        },function (error) {
+            console.log("Scanning failed: ", error);
         });
+    });    
+
+
+/*******************************************************************************************************************************************************/
+    
+    // StartPage
+    $(document).on("pagebeforecreate", "#startPage", function(e){
+        $("#startContent").html("<p>THM PhyLab</p><img src='css/images/start-loader.gif'/>");
+    });
+    
+    
+    
+    // ExpList
+    $(document).on('pagecreate', '#expListPage', function(e) {
+        $(".ui-toolbar-back-btn").remove();
+        $('#expList').delegate("li a", "click", function (){
+            localStorage.setItem("expGroupNumber", $(this).jqmData('expgroupnumber'));
+            localStorage.setItem("expNumber", $(this).jqmData('expnumber'));
+        });
+    });
+        
+    $(document).on('pagebeforeshow', '#expListPage', function(e) {
+        
     });
 
     
+    
+    // DetailsPage
     $(document).on('pagebeforeshow', '#expDetailsPage', function(e) {        
         var expGroupNumber = localStorage.getItem("expGroupNumber");
         var expNumber = localStorage.getItem("expNumber");
@@ -57,6 +72,8 @@
     });
 
 
+
+    // LocalStoragePage
     // Show all Contents from LocalStorage on one Page for control
     // Also possibility to add a key:value pair and clear LocalStorage 
     $(document).on('pagecreate', '#localStoragePage', function(e) {        
@@ -81,16 +98,25 @@
         });
     });
     
+    
+    
+    // QuizPage
     $(document).on('pagebeforeshow', '#quizPage', function(e) {        
-        var expgroupNumber = localStorage.getItem("expGroupNumber");
+        var expGroupNumber = localStorage.getItem("expGroupNumber");
         var expNumber = localStorage.getItem("expNumber");
         $("#quizContent").empty();
-        getQuizQuestions(expgroupNumber, expNumber, function(questions){
+        getQuizQuestions(expGroupNumber, expNumber, function(questions){
                                 
-            if(questions.length == 0){
-                // TODO: Wird auch aufgerufen, wenn keine Fragen mehr, weil alle beantwortet wurden.
-                // In dem Fall, soll jedoch eine Auswertung der beantworteten Fragen angezeigt werden.                
-                $("#quizContent").html("Zu diesem Versuch existieren keine Fragen");
+            if(questions.length == 0){                
+                countQuizQuestions(expGroupNumber, expNumber, function(count){                    
+                    if(count == 0){
+                        $("#quizContent").html("Zu diesem Versuch existieren keine Fragen");        
+                    } else {
+                        // Hier die Auswertung zu beantworteten Fragen erstellen
+                        
+                        
+                    }                    
+                });                
             } else {                        
             var rand = Math.floor(Math.random() * (questions.length-1 - 0 + 1)) + 0;            
             var question = questions.item(rand);
@@ -115,29 +141,36 @@
             }                              
         });
     });
+
+
+/*****************************************************************************************************************************************************/
+    //Button Click Event Handler
     
-    $(document).on("click", "#quizCheckButton", function(){
-        
+    $(document).on("click", "#quizCheckButton", function(){      
         answerId = $('input[name=quizChoice]:checked', '#quizRadioGroup').val();
         questionId = $('input[name=quizChoice]:checked', '#quizRadioGroup').attr('questionId');
         
         if(answerId){
             setGivenAnswer(questionId, answerId);            
             $("#quizRadioGroup").addClass("ui-disabled");            
-            getAnswer(answerId, function(answer){
-                //console.log(answer);
+            getAnswer(answerId, function(answer){                
                 var correct = (answer.answerIsCorrect == 1) ? true : false;
                 if(correct){                    
                     var label = $("#quizChoice-"+answer.id).prop("labels");
                     $(label).addClass("rightanswer");
-                } else {
-                    console.log("Antwort falsch");
+                } else {                    
                     var label = $("#quizChoice-"+answer.id).prop("labels");
                     $(label).addClass("wronganswer");
-                    // TODO: Markiere die gegebene Antwort als falsch und die richtige Antwort als Richtig
-                    
+                    getQuizAnswers(questionId, function(answer){
+                        for(var a=0; a<answer.length; a++){                                                       
+                            if(answer.item(a).answerIsCorrect){
+                                var label = $("#quizChoice-"+answer.item(a).id).prop("labels");
+                                $(label).addClass("rightanswer");
+                            }
+                        }                                                                                                                                                      
+                    });
                 }    
-            })
+            });
                         
             $("#quizCheckButton").remove();
             $("#quizContent").append('<a href="#quizPage" data-role="button" id="quizNextButton">Weiter</a>').enhanceWithin();            
@@ -148,7 +181,6 @@
         }    
     });
     
-    $(document).on("click", "#quizNextButton", function(){
-        // Neue Quizfrage aufrufen    
+    $(document).on("click", "#quizNextButton", function(){            
         $('#quizPage').trigger('pagebeforeshow');
     }); 
