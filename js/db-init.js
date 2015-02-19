@@ -1,11 +1,5 @@
+    
     var db;
-
-    $(document).ready(function() {
-        db = window.openDatabase("ThmPhyLabDb", "", "DB for THM-PhyLab App", 1024*1024);
-        createDBTables();
-        fillExpTables();
-        fillQuestionTables();
-    });
 
     function createDBTables() {
         db.transaction(function(tx) {
@@ -58,6 +52,7 @@
                     });
 
                 });
+                // Aufruf der Funktion zur dynamischen Erstellung der ExpList                
                 createExpList();
             },
             error: function(){
@@ -81,8 +76,7 @@
                     $.each(exp.questions, function(qId,q){
                         // Fragestellung und Fragetyp
                         db.transaction(function(tx){
-                            tx.executeSql("SELECT * FROM ExpQuestions WHERE question = ? AND expGroupNumber = ? AND expNumber = ?", [q.question, exp.expGroupNumber, exp.expNumber], function(tx, res) {
-                                //console.log(res.rows);
+                            tx.executeSql("SELECT * FROM ExpQuestions WHERE question = ? AND expGroupNumber = ? AND expNumber = ?", [q.question, exp.expGroupNumber, exp.expNumber], function(tx, res) {                                
                                 if(res.rows.length==0){
                                     tx.executeSql("INSERT INTO ExpQuestions (expGroupNumber, expNumber, question, questionType) VALUES (?,?,?,?)", [exp.expGroupNumber, exp.expNumber, q.question, q.questionType], function(tx, res) {
                                         // Rückgabe der ID des neuen Datensatzes
@@ -101,7 +95,7 @@
                             }, errorCB);
                         });
                     });
-                });
+                });                
             },
             error: function(){
                 alert('Error on JSON Request');

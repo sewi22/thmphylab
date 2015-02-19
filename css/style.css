@@ -1,3 +1,21 @@
+/**********************
+ * Hauptfarben:
+ * THM Grün         =   #80BA24
+ * THM Grau         =   #4A5C66
+ * 
+ * Zusatzfarben:
+ * Rot 7427         =   #B80040
+ * Gelb 130         =   #FFB300
+ * Hellblau 306     =   #40FFED
+ * Dunkelblau 280   =   #003BD1
+ * 
+ * Schriftarten:
+ * Arial Regular
+ * Arial Bold
+ * 
+ ******************/
+
+
 .rightanswer{
     background-color : #00FF00 !important;   
 }
@@ -5,3 +23,26 @@
 .wronganswer{
     background-color : #FF0000 !important;
 }
+
+#startPage{
+    background-color: #80BA24;    
+    position: relative;
+}
+
+#startContent{
+    color: #FFFFFF;
+    font-family: Arial;
+    font-size: xx-large;
+    text-align: center;
+
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 50%;
+    height: 50%;
+    margin: auto;   
+}
+
+

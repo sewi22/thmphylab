@@ -1,26 +1,19 @@
+          
+    $(document).ready(function() {
+        console.log("document ready Loading DB");
+        db = window.openDatabase("ThmPhyLabDb", "", "DB for THM-PhyLab App", 1024*1024);
+        createDBTables();
+        fillExpTables();
+        fillQuestionTables();            
+    });
 
-    function createExpList(){
-        getExpGroups(function (expGroups){            
-            for(var i=0; i<expGroups.length; i++) {
-                (function(i){                                                        
-                    var expGroup = expGroups.item(i);                    
-                    $('#expList').append('<div data-role="collapsible"><h3>'+ expGroup.expGroupName + '</h3><ul id="list'+expGroup.expGroupNumber+'" data-role="listview"></ul></div>').enhanceWithin();
-                    getAllExpFromGroup(expGroup.expGroupNumber, function (res){
-                        for(var e=0; e<res.length; e++){                                                                                                    
-                            var exp = res.item(e);
-                            if(exp.expIsActive == 1){                                                               
-                                $('#list'+expGroup.expGroupNumber).append('<li id="expListItem"><a href="#expDetailsPage" data-expGroupNumber="'+expGroup.expGroupNumber+'" data-expNumber="'+exp.expNumber+'" data-transition="slide">'+ expGroup.expGroupNumber + '.' + exp.expNumber + ' ' + exp.expName + '</a></li>').enhanceWithin();                                    
-                            } else {                                    
-                                $('#list'+expGroup.expGroupNumber).append('<li id="expListItem">'+ expGroup.expGroupNumber + '.' +exp.expNumber + ' ' + exp.expName + '</li>').enhanceWithin();                                    
-                            }                                                                                           
-                        };$('ul[data-role=listview]').listview('refresh');
-                    });
-                })(i);
-            }
-        });
-    }
+    $(document).on("pagebeforecreate", "#startPage", function(e){
+        console.log("pagebeforecreate startPage");        
+        $("#startContent").html("<p>THM PhyLab</p><img src='css/images/start-loader.gif'/>");                  
+    });
     
-    // Change Values on Details Page with Parameters from List Item (Example: data-name)
+    
+    // Change Values on Details Page with Parameters from List Item (Example: data-name)             
     $(function setExpToLocalStorage(){
         $('#expList').delegate('li a', 'click', function (){
             localStorage.setItem("expGroupNumber", $(this).jqmData('expgroupnumber'));
@@ -143,15 +136,13 @@
             $("#quizCheckButton").remove();
             $("#quizContent").append('<a href="#quizPage" data-role="button" id="quizNextButton">Weiter</a>').enhanceWithin();            
         } else {
+            // TODO: Reset ist nur gesetzt, um die DB nicht immer löschen zu müssen, so lange keine Auswertung usw. eingebaut ist
             resetGivenAnswer(localStorage.getItem("expGroupNumber"), localStorage.getItem("expNumber"));
             alert("Bitte wählen Sie eine Antwort aus.");
         }    
     });
     
     $(document).on("click", "#quizNextButton", function(){
-        // Neue Quizfrage aufrufen
-        console.log("trigger neue quiz Frage");
-        //$("body").pagecontainer("change", "#quizPage");
-        //$( "#quizPage" ).pagecontainer( "load", {reload : "true"});
-        //$('.footerQuizButton').trigger('click');
+        // Neue Quizfrage aufrufen    
+        $('#quizPage').trigger('pagebeforeshow');
     }); 
