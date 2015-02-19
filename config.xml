@@ -6,7 +6,7 @@
         id        = "com.phonegap.thmphylab"
         version   = "1.0.2">    
 
-    <name>JQMAppTest</name>
+    <name>THM PhyLab</name>
 
     <description>
         This is a mobile App for use in THM Physics Lab
