@@ -16,7 +16,7 @@
                         };
                         if(i == expGroups.length-1){
                             $('ul[data-role=listview]').listview('refresh');
-                            $.mobile.changePage("home.html", "fade");
+                            $.mobile.changePage("#expListPage", "fade");
                             //console.log("EXP List wurde erstellt");    
                         }                                                
                     });

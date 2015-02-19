@@ -11,11 +11,15 @@
         
         <!-- JS Libs -->
         <script src="js/jquery/jquery-2.1.3.min.js"></script>
-        
+        <script>
+            $(document).on("mobileinit" , function () {
+                $.mobile.toolbar.prototype.options.addBackBtn = true;
+            });
+        </script>
         <script src="js/jquery/jquery.mobile-1.4.5.min.js"></script>        
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="barcodescanner.js"></script>
-        
+
         <script type="text/javascript" src="js/db-init.js"></script>
         <script type="text/javascript" src="js/db-transactions.js"></script>
         <script type="text/javascript" src="js/handler.js"></script>
@@ -28,7 +32,75 @@
         <!-- Start Screen -->
         <div data-role="page" id="startPage">
             <div data-role="content" id="startContent"></div>
-        </div><!-- Start Screen -->                              
+        </div><!-- Start Screen -->
+        
+        <!-- Experiment Liste -->
+        <div data-role="page" id="expListPage">
+            <div id="expListHeader" data-role="header" data-position="fixed">
+                <h1 id="expListHeadline">Laborversuche</h1>
+              	<div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
+                    <a href="#localStoragePage" class="headerLsButton" data-role="button" data-icon="star">LocalStorage</a>
+                    <a href="#" class="headerQrButton" data-role="button" data-icon="check">QR Scanner</a>
+                </div>                                  
+            </div>
+            <div data-role="content">
+                <div id="expList" data-role="collapsible-set" data-inset="false" data-collapsed-icon="carat-d" data-expanded-icon="carat-u"></div>                
+            </div>
+            <div id="expListFooter" data-role="footer" data-position="fixed">
+                <h4>Footer</h4>
+            </div>
+        </div><!-- Experiment Liste -->
+        
+        <!-- Detailseite Experiment -->
+        <div data-role="page" id="expDetailsPage">
+            <div id="expDetailsHeader" data-role="header" data-position="fixed">                
+                <h1 id="expDetailsHeadline"></h1>
+                <div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
+                <a href="#" class="headerFavButton" data-role="button" data-icon="star">Fav</a>
+                <a href="#" class="headerQrButton" data-role="button" data-icon="check">QR Scanner</a>
+                </div>
+            </div>
+            <div data-role="content" id="expDetailsContent">
+                <p>Hello world</p>                
+            </div>
+            <div id="expDetailsFooter" data-role="footer" data-position="fixed">
+                <h4>Footer</h4>
+                <div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
+                <a href="#quizPage" class="footerQuizButton" data-role="button" data-icon="home">Quiz</a>                
+                </div>
+            </div>
+        </div><!-- Detailseite Experiment -->
+        
+        <!-- Übersicht LocalStorage Inhalt -->
+        <div data-role="page" id="localStoragePage">
+            <div id="localStorageHeader" data-role="header" data-position="fixed">                
+                <h1 id="expDetailsHeadline"></h1>
+                <div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
+                <a href="#" class="headerFavButton" data-role="button" data-icon="star">Fav</a>
+                <a href="#" class="headerQrButton" data-role="button" data-icon="check">QR Scanner</a>
+                </div>
+            </div>
+            <div data-role="content" id="localStorageContent">
+                <p>Inhalte des LocalStorage:</p>
+                <a href="#" id="addLsButton" data-role="button" data-icon="check">zu LocalStorage hinzuf&uuml;gen</a>
+                <a href="#" id="delLsButton" data-role="button" data-icon="check">LocalStorage l&ouml;schen</a>
+            </div>
+            <div id="localStorageFooter" data-role="footer" data-position="fixed">
+                <h4>Footer</h4>
+            </div>
+        </div><!-- Übersicht LocalStorage Inhalt -->
+        
+        <!-- Quiz Page -->
+        <div data-role="page" id="quizPage">
+            <div id="quizHeader" data-role="header" data-position="fixed">                
+                <h1 id="quizHeadline">Quiz</h1>
+            </div>
+            <div data-role="content" id="quizContent">
+            </div>
+            <div id="quizFooter" data-role="footer" data-position="fixed">
+                <h4>Quiz Footer</h4>
+            </div>
+        </div><!-- Quiz Page -->
     </body>
 
 </html>
