@@ -13,6 +13,14 @@
     });
     
     
+    document.addEventListener("backbutton", function(e){
+        if($.mobile.activePage.is('#expListPage')){
+            navigator.app.exitApp();
+        } else {
+            navigator.app.backHistory()
+        }
+    }, false);
+    
     // Change Values on Details Page with Parameters from List Item (Example: data-name)             
     $(function setExpToLocalStorage(){
         $('#expList').delegate('li a', 'click', function (){
