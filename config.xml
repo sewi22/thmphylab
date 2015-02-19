@@ -3,16 +3,16 @@
 <!-- config.xml reference: https://build.phonegap.com/docs/config-xml -->
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
-        id        = "com.phonegap.jqmtest"
-        version   = "1.0.1">    
+        id        = "com.phonegap.thmphylab"
+        version   = "1.0.2">    
 
     <name>JQMAppTest</name>
 
     <description>
-        This is an App Test with JQuery Mobile
+        This is a mobile App for use in THM Physics Lab
     </description>
 
-    <author href="http://jqmtest.de" email="swinterling@gmail.com">
+    <author href="http://thmphylab.de" email="swinterling@gmail.com">
         Sebastian Winterling
     </author>
     
