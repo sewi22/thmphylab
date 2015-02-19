@@ -9,15 +9,18 @@
                         for(var e=0; e<res.length; e++){                                                                                                    
                             var exp = res.item(e);
                             if(exp.expIsActive == 1){                                                               
-                                $('#list'+expGroup.expGroupNumber).append('<li id="expListItem"><a href="#expDetailsPage" data-expGroupNumber="'+expGroup.expGroupNumber+'" data-expNumber="'+exp.expNumber+'" data-transition="slide">'+ expGroup.expGroupNumber + '.' + exp.expNumber + ' ' + exp.expName + '</a></li>');                                                                
+                                $('#list'+expGroup.expGroupNumber).append('<li id="expListItem"><a href="#expDetailsPage" data-expGroupNumber="'+expGroup.expGroupNumber+'" data-expNumber="'+exp.expNumber+'" data-transition="slide">'+ expGroup.expGroupNumber + '.' + exp.expNumber + ' ' + exp.expName + '</a></li>');                                                                                                
                             } else {                                    
-                                $('#list'+expGroup.expGroupNumber).append('<li id="expListItem">'+ expGroup.expGroupNumber + '.' +exp.expNumber + ' ' + exp.expName + '</li>');                                                                                                    
+                                $('#list'+expGroup.expGroupNumber).append('<li id="expListItem">'+ expGroup.expGroupNumber + '.' +exp.expNumber + ' ' + exp.expName + '</li>');                                                                                                                                
                             }                                                                                           
-                        };                        
-                        $('ul[data-role=listview]').listview('refresh');
+                        };
+                        if(i == expGroups.length-1){
+                            $('ul[data-role=listview]').listview('refresh');
+                            $.mobile.changePage("home.html", "fade");
+                            //console.log("EXP List wurde erstellt");    
+                        }                                                
                     });
-                })(i);
-                $.mobile.changePage("home.html#expListPage", "fade");        
+                })(i);                        
             }             
         });        
     }

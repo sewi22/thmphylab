@@ -1,14 +1,12 @@
           
-    $(document).ready(function() {
-        console.log("document ready Loading DB");
+    $(document).ready(function() {        
         db = window.openDatabase("ThmPhyLabDb", "", "DB for THM-PhyLab App", 1024*1024);
         createDBTables();
         fillExpTables();
         fillQuestionTables();            
     });
 
-    $(document).on("pagebeforecreate", "#startPage", function(e){
-        console.log("pagebeforecreate startPage");        
+    $(document).on("pagebeforecreate", "#startPage", function(e){                
         $("#startContent").html("<p>THM PhyLab</p><img src='css/images/start-loader.gif'/>");                  
     });
     
