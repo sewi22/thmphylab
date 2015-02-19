@@ -1,0 +1,119 @@
+{
+    "quiz_items": [
+        {
+            "question": "Frage 1",
+            "type":"mc",
+            "answers": [
+                {
+                    "answer": "A",
+                    "correct": false,
+                    "tip": "Das ist falsch"
+                },
+                {
+                    "answer": "B",
+                    "correct": true,
+                    "tip": "Stimmt"
+                },
+                {
+                    "answer": "C",
+                    "correct": false,
+                    "tip": "Stimmt nicht"
+                },
+                {
+                    "answer": "D",
+                    "correct": false,
+                    "tip": "Total daneben"
+                }
+            ]
+        },
+        {
+            "question": "Frage 2",
+            "type":"mc",
+            "answers": [
+                {
+                    "answer": "A",
+                    "correct": false,
+                    "tip": "Das ist falsch"
+                },
+                {
+                    "answer": "B",
+                    "correct": false,
+                    "tip": "Falsch"
+                },
+                {
+                    "answer": "C",
+                    "correct": false,
+                    "tip": "Stimmt nicht"
+                },
+                {
+                    "answer": "D",
+                    "correct": true,
+                    "tip": "Korrekt"
+                }
+            ]
+        },
+        {
+            "question": "Frage 3",
+            "type":"mc",
+            "answers": [
+                {
+                    "answer": "A",
+                    "correct": true,
+                    "tip": "Das ist richtig"
+                },
+                {
+                    "answer": "B",
+                    "correct": false,
+                    "tip": "Das ist falsch"
+                },
+                {
+                    "answer": "C",
+                    "correct": false,
+                    "tip": "Stimmt nicht"
+                },
+                {
+                    "answer": "D",
+                    "correct": false,
+                    "tip": "Total daneben"
+                }
+            ]
+        },
+        {
+            "question": "Frage 4",
+            "type":"mc",
+            "answers": [
+                {
+                    "answer": "A",
+                    "correct": false,
+                    "tip": "Das ist falsch"
+                },
+                {
+                    "answer": "B",
+                    "correct": false,
+                    "tip": "Stimmt nicht"
+                },
+                {
+                    "answer": "C",
+                    "correct": false,
+                    "tip": "Stimmt nicht"
+                },
+                {
+                    "answer": "D",
+                    "correct": true,
+                    "tip": "Richtig"
+                }
+            ]
+        },
+        {
+            "question": "Frage 5",
+            "type":"input",
+            "answers": [
+                {
+                    "answer": 11,
+                    "posrange": 2.1,
+                    "negrange": 1.4
+                }
+            ]
+        }
+    ]
+}
