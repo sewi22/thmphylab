@@ -24,6 +24,10 @@
     background-color : #FF0000 !important;
 }
 
+.otheranswer{
+    background-color : #0000FF !important;
+}
+
 #startPage{
     background-color: #80BA24;    
     position: relative;

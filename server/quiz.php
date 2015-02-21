@@ -9,108 +9,63 @@
             'expNumber' => 1,
             'questions' => array(              
                 array(
-                    'question' => '1 Wer war erster Bundeskanzler der BRD?',
+                    'question' => 'Wer war erster Bundeskanzler der BRD?',
                     'questionType' => 'mc',
                     'answers' => array(
                         array(
-                            "answer" => "A denauer",
+                            "answer" => "Adenauer",
                             "correct" => true,                
                             "helpText" => "Das ist richtig"
                         ),
                         array(
-                            "answer" => "B denauer",
+                            "answer" => "Kohl",
                             "correct" => false,
                             "helpText" => "Stimmt nicht"
                         ),
                         array(
-                            "answer" => "C denauer",
+                            "answer" => "Heuss",
                             "correct" => false,
                             "helpText" => "Stimmt nicht"
-                        ),
-                        array(
-                            "answer" => "D denauer",
-                            "correct" => false,
-                            "helpText" => "Nur fast Richtig"
                         )
                     )                
                 ),
                 array(
-                    'question' => '2 Wieviele Seiten hat ein W&uuml;rfel?',
+                    'question' => 'Wieviele Seiten hat ein W&uuml;rfel?',
                     'questionType' => 'mc',
                     'answers' => array(
                         array(
-                            "answer" => "A 1",
+                            "answer" => "sechs",
+                            "correct" => true,
+                            "helpText" => "Falsch"
+                        ),
+                        array(
+                            "answer" => "vier",
                             "correct" => false,
                             "helpText" => "Falsch"
                         ),
                         array(
-                            "answer" => "B 4",
-                            "correct" => false,
-                            "helpText" => "Falsch"
-                        ),
-                        array(
-                            "answer" => "C 6",
+                            "answer" => "sechs",
                             "correct" => true,
                             "helpText" => "Logisch"
                         ),
                         array(
-                            "answer" => "D 12",
+                            "answer" => "acht",
                             "correct" => false,
                             "helpText" => "Falsch"
                         )
                     )
                 ),            
                 array(
-                    'question' => '3 Wie hei&szlig;t die Hauptstadt Italiens?',
-                    'questionType' => 'mc',
-                    'answers' => array(
-                        array(
-                            "answer" => "A Neapel",
-                            "correct" => false,
-                            "helpText" => "Das stimmt nicht"
-                        ),
-                        array(
-                            "answer" => "B Mailand",
-                            "correct" => false,
-                            "helpText" => "Falsch"
-                        ),
-                        array(
-                            "answer" => "C Turin",
-                            "correct" => false,
-                            "helpText" => "N&ouml;"
-                        ),
-                        array(
-                            "answer" => "D Rom",
-                            "correct" => true,
-                            "helpText" => "Korrekt"
-                        )
-                    )
+                    'question' => 'Ab welcher Temperatur kocht Wasser?',
+                    'questionType' => 'number',
+                    'answers' => array(100.5),
+                    'plus' => 3,
+                    'minus' => 2.2                     
                 ),
                 array(
-                    'question' => '4 Welches ist das wertvollste Unternehmen der Welt?',
-                    'questionType' => 'mc',
-                    'answers' => array(
-                        array(
-                            "answer" => "A Microsoft",
-                            "correct" => false,
-                            "helpText" => "Das ist falsch"
-                        ),
-                        array(
-                            "answer" => "B Apple",
-                            "correct" => true,
-                            "helpText" => "Stimmt"
-                        ),
-                        array(
-                            "answer" => "C Coca Cola",
-                            "correct" => false,
-                            "helpText" => "Stimmt nicht"
-                        ),
-                        array(
-                            "answer" => "D IBM",
-                            "correct" => false,
-                            "helpText" => "Nicht richtig"
-                        )
-                    )
+                    'question' => 'Welches ist das wertvollste Unternehmen der Welt?',
+                    'questionType' => 'text',
+                    'answers' => array('A pP?lE')
                 )
             )
         ),
@@ -119,80 +74,54 @@
             'expNumber' => 2,
             'questions' => array(
                 array(
-                    'question' => '1 Wieviele Bundesl&auml;nder hat Deutschland?',
-                    'questionType' => 'mc',
-                    'answers' => array(
-                        array(
-                            "answer" => "A 10",
-                            "correct" => false,
-                            "helpText" => "Das ist falsch"
-                        ),
-                        array(
-                            "answer" => "B 16",
-                            "correct" => true,
-                            "helpText" => "Das ist richtig"
-                        ),
-                        array(
-                            "answer" => "C 19",
-                            "correct" => false,
-                            "helpText" => "Stimmt gar nicht"
-                        ),
-                        array(
-                            "answer" => "D 22",
-                            "correct" => false,
-                            "helpText" => "Ganz falsch"
-                        )
-                    )
+                    'question' => 'Wieviele Bundesl&auml;nder hat Deutschland?',
+                    'questionType' => 'number',
+                    'answers' => array(16)                    
                 ),
                 array(
-                    'question' => '2 Wieviele Monate haben 28 Tage?',
+                    'question' => 'Wieviele Monate haben 28 Tage?',
+                    'questionType' => 'text',
+                    'answers' => array('Jeder ', 'al-le')                    
+                ),
+                array(
+                    'question' => 'Welche deutsche Stadt hat derzeit keinen Fu&szlig;ball Erstligisten?',
                     'questionType' => 'mc',
                     'answers' => array(
                         array(
-                            "answer" => "A keiner",
+                            "answer" => "Frankfurt",
                             "correct" => false,
                             "helpText" => "Jeder Monat hat 28 Tage"
                         ),
                         array(
-                            "answer" => "B einer",
+                            "answer" => "Hamburg",
                             "correct" => false,
                             "helpText" => "Stimmt nicht"
                         ),
                         array(
-                            "answer" => "C zwei",
+                            "answer" => "K&ouml;ln",
                             "correct" => false,
                             "helpText" => "Stimmt nicht"
                         ),
                         array(
-                            "answer" => "D alle",
-                            "correct" => true,
+                            "answer" => "M&uuml;nchen",
+                            "correct" => false,
                             "helpText" => "Nat&uuml;rlich haben alle Monate 28 Tage"
                         )
                     )
                 ),
                 array(
-                    'question' => '3 Wer wird Deutscher Meister?',
+                    'question' => 'Wer wird Deutscher Meister?',
                     'questionType' => 'mc',
                     'answers' => array(
                         array(
-                            "answer" => "A Eintracht Frankfurt",
+                            "answer" => "Eintracht Frankfurt",
                             "correct" => true,
                             "helpText" => "Wer sonst"
                         ),
                         array(
-                            "answer" => "B Eintracht Frankfurt",
+                            "answer" => "Eintracht Frankfurt",
                             "correct" => true,
                             "helpText" => "Die Bayern nicht"
-                        ),
-                        array(
-                            "answer" => "C Eintracht Frankfurt",
-                            "correct" => true,
-                            "helpText" => "Ganz sicher nicht der HSV"
-                        ),
-                        array(
-                            "answer" => "D Eintracht Frankfurt",
-                            "correct" => true,
-                            "helpText" => "Nur die SGE"
                         )
                     )
                 )

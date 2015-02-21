@@ -7,7 +7,7 @@
     });
 
 
-    // Decisison if going back in history or exiting app by clicking the "Back Button"
+    // Decision if going back in history or exiting app by clicking the "Back Button"
     $(document).on("click", "backbutton", function(e){
         if($.mobile.activePage.is('#expListPage')){
             navigator.app.exitApp();
@@ -16,6 +16,23 @@
         }
     }, false);
     
+
+    $(document).on("click", ".headerFavButton", function(){                
+        // Experimente als Favorit markieren und Button entsprechend darstellen (Theme)
+        expGroupNumber = localStorage.getItem("expGroupNumber");
+        expNumber = localStorage.getItem("expNumber");
+        
+        getExpIsFav(expGroupNumber, expNumber, function(result){            
+            var expIsFav = (result.expIsFav == 0) ? 1 : 0;            
+            setExpIsFav(expIsFav, expGroupNumber, expNumber, function(){});
+            expIsFav = (expIsFav == 0) ? false : true;            
+            //$(".headerFavButton").addClass('ui-state-focus');
+            //$(".headerFavButton").addClass('ui-state-active');
+            //$(".headerFavButton").addClass('ui-state-hover');
+            
+        });        
+        
+    });
 
     // Open QR Code Reader and using callback values by scanning a QR Code Button
     //$(document).on('pagecreate', function(e) {
@@ -97,90 +114,4 @@
             $("#localStorageContent p").append(localStorage.key(localStorage.length-1)+ " : "+localStorage.getItem(localStorage.key(localStorage.length-1))+"<br/>");
         });
     });
-    
-    
-    
-    // QuizPage
-    $(document).on('pagebeforeshow', '#quizPage', function(e) {        
-        var expGroupNumber = localStorage.getItem("expGroupNumber");
-        var expNumber = localStorage.getItem("expNumber");
-        $("#quizContent").empty();
-        getQuizQuestions(expGroupNumber, expNumber, function(questions){
-                                
-            if(questions.length == 0){                
-                countQuizQuestions(expGroupNumber, expNumber, function(count){                    
-                    if(count == 0){
-                        $("#quizContent").html("Zu diesem Versuch existieren keine Fragen");        
-                    } else {
-                        // Hier die Auswertung zu beantworteten Fragen erstellen
-                        
-                        
-                    }                    
-                });                
-            } else {                        
-            var rand = Math.floor(Math.random() * (questions.length-1 - 0 + 1)) + 0;            
-            var question = questions.item(rand);
-            $("#quizContent").append(question.question);
-            getQuizAnswers(question.id, function(answers){
-                answersArr = [];                                
-                for(var a=0; a<answers.length; a++){
-                    answersArr[a] = new Array();
-                    answersArr[a].id = answers.item(a).id;                    
-                    answersArr[a].answer = answers.item(a).answer;
-                    answersArr[a].correct = answers.item(a).answerIsCorrect;
-                    answersArr[a].help = answers.item(a).helpText;
-                    answersArr[a].questionId = answers.item(a).questionId;                                                                                                                 
-                }     
-                answersArr = shuffle(answersArr);
-                $("#quizContent").append('<div data-role="controlgroup"><fieldset id="quizRadioGroup" data-role="controlgroup"></fieldset></div>').enhanceWithin();                
-                $.each(answersArr, function(ind, a) {
-                    $("#quizRadioGroup").append('<input type="radio" name="quizChoice" id="quizChoice-'+a.id+'" value="'+a.id+'" questionId="'+question.id+'" /><label for="quizChoice-'+a.id+'">'+a.answer+'</label>').enhanceWithin();                    
-                });               
-                $("#quizContent").append('<a href="#" data-role="button" id="quizCheckButton">Antwort pr&uuml;fen</a>').enhanceWithin();                          
-            });     
-            }                              
-        });
-    });
-
-
-/*****************************************************************************************************************************************************/
-    //Button Click Event Handler
-    
-    $(document).on("click", "#quizCheckButton", function(){      
-        answerId = $('input[name=quizChoice]:checked', '#quizRadioGroup').val();
-        questionId = $('input[name=quizChoice]:checked', '#quizRadioGroup').attr('questionId');
         
-        if(answerId){
-            setGivenAnswer(questionId, answerId);            
-            $("#quizRadioGroup").addClass("ui-disabled");            
-            getAnswer(answerId, function(answer){                
-                var correct = (answer.answerIsCorrect == 1) ? true : false;
-                if(correct){                    
-                    var label = $("#quizChoice-"+answer.id).prop("labels");
-                    $(label).addClass("rightanswer");
-                } else {                    
-                    var label = $("#quizChoice-"+answer.id).prop("labels");
-                    $(label).addClass("wronganswer");
-                    getQuizAnswers(questionId, function(answer){
-                        for(var a=0; a<answer.length; a++){                                                       
-                            if(answer.item(a).answerIsCorrect){
-                                var label = $("#quizChoice-"+answer.item(a).id).prop("labels");
-                                $(label).addClass("rightanswer");
-                            }
-                        }                                                                                                                                                      
-                    });
-                }    
-            });
-                        
-            $("#quizCheckButton").remove();
-            $("#quizContent").append('<a href="#quizPage" data-role="button" id="quizNextButton">Weiter</a>').enhanceWithin();            
-        } else {
-            // TODO: Reset ist nur gesetzt, um die DB nicht immer löschen zu müssen, so lange keine Auswertung usw. eingebaut ist
-            resetGivenAnswer(localStorage.getItem("expGroupNumber"), localStorage.getItem("expNumber"));
-            alert("Bitte wählen Sie eine Antwort aus.");
-        }    
-    });
-    
-    $(document).on("click", "#quizNextButton", function(){            
-        $('#quizPage').trigger('pagebeforeshow');
-    }); 

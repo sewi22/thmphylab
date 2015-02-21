@@ -24,7 +24,8 @@
         <script type="text/javascript" src="js/db-transactions.js"></script>
         <script type="text/javascript" src="js/handler.js"></script>
         <script type="text/javascript" src="js/functions.js"></script>
-        <script type="text/javascript" src="js/helper.js"></script>        
+        <script type="text/javascript" src="js/helper.js"></script>
+        <script type="text/javascript" src="js/quiz.js"></script>        
                             
     </head>
 
@@ -34,8 +35,17 @@
             <div data-role="content" id="startContent"></div>
         </div><!-- Start Screen -->
         
+
+        
+        
+        
+        
+        
+        
+        
+        
         <!-- Experiment Liste -->
-        <div data-role="page" id="expListPage">
+        <div data-role="page" id="expListPages">
             <div id="expListHeader" data-role="header" data-position="fixed" addBackBtn="false">
                 <h1 id="expListHeadline">Laborversuche</h1>
               	<div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
@@ -46,9 +56,9 @@
             <div data-role="content">
                 <div id="expList" data-role="collapsible-set" data-inset="false" data-collapsed-icon="carat-d" data-expanded-icon="carat-u"></div>                
             </div>
-            <div id="expListFooter" data-role="footer" data-position="fixed">
+            <!--div id="expListFooter" data-role="footer" data-position="fixed">
                 <h4>Footer</h4>
-            </div>
+            </div-->
         </div><!-- Experiment Liste -->
         
         <!-- Detailseite Experiment -->
@@ -101,6 +111,29 @@
                 <h4>Quiz Footer</h4>
             </div>
         </div><!-- Quiz Page -->
+        
+	
+        <a href="#popupMenu" data-rel="popup" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-gear ui-btn-icon-left ui-btn-a">Actions...</a>
+        <div data-role="popup" id="popupMenu" data-theme="b">
+            <ul data-role="listview" data-inset="true" style="min-width:210px;">
+                <li data-role="list-divider">Choose an action</li>
+                <li><a href="#">als Favorit speichern</a></li>
+                <li><a href="#">LocalStorage</a></li>
+                <li><a href="#">QR Scanner</a></li>
+                <li><a href="#">Impressum</a></li>
+            </ul>
+        </div>
+        
+        
+        <!-- Confirm Dialog -->
+        <div data-role="dialog" id="sure" data-title="Are you sure?">
+            <div data-role="content">
+                <h3 class="sure-1"></h3>
+                <p class="sure-2"></p>
+                <a href="#" class="sure-do" data-role="button" data-theme="b" data-rel="back">Yes</a>
+                <a href="#" class="sure-no" data-role="button" data-theme="c" data-rel="back">No</a>
+            </div>
+        </div><!-- Confirm Dialog -->
     </body>
 
 </html>
