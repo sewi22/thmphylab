@@ -53,7 +53,8 @@
 
                 });
                 // Aufruf der Funktion zur dynamischen Erstellung der ExpList                
-                createExpList();
+                createExpListAll();
+                createExpListFav();
             },
             error: function(){
                 alert('Error on JSON Request');

@@ -35,31 +35,59 @@
             <div data-role="content" id="startContent"></div>
         </div><!-- Start Screen -->
         
-
         
-        
-        
-        
-        
-        
-        
-        
-        <!-- Experiment Liste -->
-        <div data-role="page" id="expListPages">
-            <div id="expListHeader" data-role="header" data-position="fixed" addBackBtn="false">
-                <h1 id="expListHeadline">Laborversuche</h1>
-              	<div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
+        <!-- Experiment All Liste -->
+        <div data-role="page" id="expListAllPage" class="expListPage">
+            <div id="expListAllHeader" data-role="header" data-position="fixed" addBackBtn="false" data-id="footer">
+                <h1 id="expListAllHeadline">Laborversuche</h1>
+              	<!--div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
                     <a href="#localStoragePage" class="headerLsButton" data-role="button" data-icon="star">LocalStorage</a>
                     <a href="#" class="headerQrButton" data-role="button" data-icon="check">QR Scanner</a>
+                </div-->
+                <div id="expListAllNavbar" data-role="navbar">
+                    <ul>
+                        <li><a href="#" data-theme="a" data-ajax="false" class="ui-btn-active ui-state-persist">Alle</a></li>
+                        <li><a href="#expListFavPage" data-theme="a" data-ajax="false">Favoriten</a></li>
+                    </ul>
+                </div>                                
+            </div>
+ 
+            <div id="expListAllContent" class="ui-content">
+                <div id="expListAll" data-role="collapsible-set" data-inset="false" data-collapsed-icon="carat-d" data-expanded-icon="carat-u"></div>                
+            </div>
+        </div>
+                     
+        <!-- Experiment Fav Liste -->
+        <div data-role="page" id="expListFavPage" class="expListPage">       
+            <div id="expListFavHeader" data-role="header" data-position="fixed" addBackBtn="false" data-id="footer">
+                <h1 id="expListFavHeadline">Laborversuche</h1>
+              	<!--div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
+                    <a href="#localStoragePage" class="headerLsButton" data-role="button" data-icon="star">LocalStorage</a>
+                    <a href="#" class="headerQrButton" data-role="button" data-icon="check">QR Scanner</a>
+                </div-->
+                <div id="expListFavNavbar" data-role="navbar">
+                    <ul>
+                        <li><a href="#expListAllPage" data-theme="a" data-ajax="false">Alle</a></li>
+                        <li><a href="#" data-theme="a" data-ajax="false" class="ui-btn-active ui-state-persist">Favoriten</a></li>
+                    </ul>
                 </div>                                  
             </div>
-            <div data-role="content">
-                <div id="expList" data-role="collapsible-set" data-inset="false" data-collapsed-icon="carat-d" data-expanded-icon="carat-u"></div>                
+            
+            <div id="expListFavContent" data-role="content">
+                <div id="expListFav" class="expList" data-role="listview" data-inset="false"></div>                
             </div>
-            <!--div id="expListFooter" data-role="footer" data-position="fixed">
-                <h4>Footer</h4>
-            </div-->
         </div><!-- Experiment Liste -->
+        
+        
+        
+    
+    
+    
+    
+    
+        
+        
+        
         
         <!-- Detailseite Experiment -->
         <div data-role="page" id="expDetailsPage">
@@ -95,10 +123,11 @@
                 <a href="#" id="addLsButton" data-role="button" data-icon="check">zu LocalStorage hinzuf&uuml;gen</a>
                 <a href="#" id="delLsButton" data-role="button" data-icon="check">LocalStorage l&ouml;schen</a>
             </div>
-            <div id="localStorageFooter" data-role="footer" data-position="fixed">
+            <!--div id="localStorageFooter" data-role="footer" data-position="fixed">
                 <h4>Footer</h4>
-            </div>
+            </div-->
         </div><!-- Übersicht LocalStorage Inhalt -->
+        
         
         <!-- Quiz Page -->
         <div data-role="page" id="quizPage">
@@ -107,13 +136,14 @@
             </div>
             <div data-role="content" id="quizContent">
             </div>
-            <div id="quizFooter" data-role="footer" data-position="fixed">
+            <!--div id="quizFooter" data-role="footer" data-position="fixed">
                 <h4>Quiz Footer</h4>
-            </div>
+            </div-->
         </div><!-- Quiz Page -->
         
 	
-        <a href="#popupMenu" data-rel="popup" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-gear ui-btn-icon-left ui-btn-a">Actions...</a>
+	   <!-- Popup Menu als Context Menu -->
+        <!--a href="#popupMenu" data-rel="popup" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-gear ui-btn-icon-left ui-btn-a">Actions...</a>
         <div data-role="popup" id="popupMenu" data-theme="b">
             <ul data-role="listview" data-inset="true" style="min-width:210px;">
                 <li data-role="list-divider">Choose an action</li>
@@ -122,7 +152,7 @@
                 <li><a href="#">QR Scanner</a></li>
                 <li><a href="#">Impressum</a></li>
             </ul>
-        </div>
+        </div-->
         
         
         <!-- Confirm Dialog -->

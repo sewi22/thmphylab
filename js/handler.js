@@ -60,16 +60,32 @@
     
     
     // ExpList
-    $(document).on('pagecreate', '#expListPage', function(e) {
+    $(document).on('pagecreate', '.expListPage', function(e) {
         $(".ui-toolbar-back-btn").remove();
-        $('#expList').delegate("li a", "click", function (){
+        $('.expList').delegate("li a", "click", function (){
             localStorage.setItem("expGroupNumber", $(this).jqmData('expgroupnumber'));
             localStorage.setItem("expNumber", $(this).jqmData('expnumber'));
         });
     });
+    
+    
+    $(document).on( "swipeleft", "#expListAllPage", function(event) {
+        console.log("Swipe Right auf ListAll");
+        $.mobile.changePage("#expListFavPage", "fade");
+    });
+    
+    $(document).on( "swiperight", "#expListFavPage", function(event) {
+        console.log("Swipe Left auf ListFav");
+        $.mobile.changePage("#expListAllPage", "fade");
+    });    
+    
         
-    $(document).on('pagebeforeshow', '#expListPage', function(e) {
+    $(document).on('pagecreate', '#expListAllPage', function(e) {
         
+    });
+    
+    $(document).on('pagecreate', '#expListFavPage', function(e) {
+
     });
 
     
