@@ -16,7 +16,7 @@
 
     function errorCB(err){
         console.log("Folgender DB Fehler ist aufgetreten: "+err.code);
-        //alert("Error: "+err.code);
+        alert("Error: "+err.code);
     }
 
     function fillExpTables(){
@@ -52,12 +52,13 @@
                     });
 
                 });
-                // Aufruf der Funktion zur dynamischen Erstellung der ExpList                
+                // Aufruf der Funktion zur dynamischen Erstellung der ExpLists                
                 createExpListAll();
                 createExpListFav();
             },
-            error: function(){
-                alert('Error on JSON Request');
+            error: function(err){
+                console.log('Error on JSON Request: '+err.code);
+                alert('Error on JSON Request: '+err.code);
             }
         });
     }
@@ -107,8 +108,9 @@
                     });
                 });                                
             },
-            error: function(){
-                alert('Error on JSON Request');
+            error: function(err){
+                console.log('Error on JSON Request: '+err.code);
+                alert('Error on JSON Request: '+err.code);
             }
         });
     }

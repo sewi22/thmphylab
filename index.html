@@ -13,19 +13,28 @@
         <script src="js/jquery/jquery-2.1.3.min.js"></script>
         <script>
             $(document).on("mobileinit" , function(){                
-                $.mobile.toolbar.prototype.options.addBackBtn = true;                    
+                //$.mobile.toolbar.prototype.options.addBackBtn = true;
+                $.mobile.ignoreContentEnabled = true;                                                  
             });
         </script>
+        <!--script src="js/jquery/jquery.mobile-1.3.2.js"></script-->
         <script src="js/jquery/jquery.mobile-1.4.5.min.js"></script>        
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="barcodescanner.js"></script>
 
-        <script type="text/javascript" src="js/db-init.js"></script>
+        <script type="text/javascript" src="js/db-init.js"></script>  
         <script type="text/javascript" src="js/db-transactions.js"></script>
-        <script type="text/javascript" src="js/handler.js"></script>
+        
+        <script type="text/javascript" src="js/list-functions.js"></script>
+        <script type="text/javascript" src="js/list-handler.js"></script>
+        
         <script type="text/javascript" src="js/functions.js"></script>
-        <script type="text/javascript" src="js/helper.js"></script>
-        <script type="text/javascript" src="js/quiz.js"></script>        
+        <script type="text/javascript" src="js/handler.js"></script>        
+                
+        <script type="text/javascript" src="js/quiz-functions.js"></script>
+        <script type="text/javascript" src="js/quiz-handler.js"></script>   
+        
+        <script type="text/javascript" src="js/helper.js"></script>     
                             
     </head>
 
@@ -33,137 +42,87 @@
         <!-- Start Screen -->
         <div data-role="page" id="startPage">
             <div data-role="content" id="startContent"></div>
-        </div><!-- Start Screen -->
+        </div><!-- Start Screen -->        
         
-        
-        <!-- Experiment All Liste -->
+        <!-- Experiment All List -->        
         <div data-role="page" id="expListAllPage" class="expListPage">
-            <div id="expListAllHeader" data-role="header" data-position="fixed" addBackBtn="false" data-id="footer">
-                <h1 id="expListAllHeadline">Laborversuche</h1>
-              	<!--div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
-                    <a href="#localStoragePage" class="headerLsButton" data-role="button" data-icon="star">LocalStorage</a>
-                    <a href="#" class="headerQrButton" data-role="button" data-icon="check">QR Scanner</a>
-                </div-->
-                <div id="expListAllNavbar" data-role="navbar">
-                    <ul>
-                        <li><a href="#" data-theme="a" data-ajax="false" class="ui-btn-active ui-state-persist">Alle</a></li>
-                        <li><a href="#expListFavPage" data-theme="a" data-ajax="false">Favoriten</a></li>
-                    </ul>
-                </div>                                
+            <div id="expListAllHeader" data-role="header" data-position="fixed" data-theme="a" addBackBtn="false" data-id="list-header">
+                <h1 id="expListAllHeadline">THM PhyLab</h1>                                            
             </div>
- 
             <div id="expListAllContent" class="ui-content">
                 <div id="expListAll" data-role="collapsible-set" data-inset="false" data-collapsed-icon="carat-d" data-expanded-icon="carat-u"></div>                
             </div>
-        </div>
-                     
-        <!-- Experiment Fav Liste -->
+        </div><!-- Experiment All List -->        
+        
+        <!-- Experiment Fav List -->        
         <div data-role="page" id="expListFavPage" class="expListPage">       
-            <div id="expListFavHeader" data-role="header" data-position="fixed" addBackBtn="false" data-id="footer">
-                <h1 id="expListFavHeadline">Laborversuche</h1>
-              	<!--div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
-                    <a href="#localStoragePage" class="headerLsButton" data-role="button" data-icon="star">LocalStorage</a>
-                    <a href="#" class="headerQrButton" data-role="button" data-icon="check">QR Scanner</a>
-                </div-->
-                <div id="expListFavNavbar" data-role="navbar">
-                    <ul>
-                        <li><a href="#expListAllPage" data-theme="a" data-ajax="false">Alle</a></li>
-                        <li><a href="#" data-theme="a" data-ajax="false" class="ui-btn-active ui-state-persist">Favoriten</a></li>
-                    </ul>
-                </div>                                  
-            </div>
-            
+            <div id="expListFavHeader" data-role="header" data-position="fixed" data-theme="a" addBackBtn="false" data-id="list-header">
+                <h1 id="expListFavHeadline">THM PhyLab</h1>                                     
+            </div>            
             <div id="expListFavContent" data-role="content">
                 <div id="expListFav" class="expList" data-role="listview" data-inset="false"></div>                
             </div>
-        </div><!-- Experiment Liste -->
+        </div><!-- Experiment Fav List -->        
         
+              
+                
         
-        
-    
-    
-    
-    
-    
-        
-        
-        
-        
-        <!-- Detailseite Experiment -->
+        <!-- Detailseite Experiment -->        
         <div data-role="page" id="expDetailsPage">
-            <div id="expDetailsHeader" data-role="header" data-position="fixed">                
+            <div id="expDetailsHeader" data-role="header" data-position="fixed" data-id="exp-header">                
                 <h1 id="expDetailsHeadline"></h1>
-                <div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
-                <a href="#" class="headerFavButton" data-role="button" data-icon="star">Fav</a>
-                <a href="#" class="headerQrButton" data-role="button" data-icon="check">QR Scanner</a>
-                </div>
             </div>
             <div data-role="content" id="expDetailsContent">
                 <p>Hello world</p>                
             </div>
-            <div id="expDetailsFooter" data-role="footer" data-position="fixed">
-                <h4>Footer</h4>
-                <div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
-                <a href="#quizPage" class="footerQuizButton" data-role="button" data-icon="home">Quiz</a>                
-                </div>
+            <div id="expDetailsFooter" data-role="footer" data-position="fixed" data-id="exp-footer"></div>
             </div>
-        </div><!-- Detailseite Experiment -->
+        </div><!-- Detailseite Experiment -->        
         
-        <!-- Übersicht LocalStorage Inhalt -->
+        <!-- Quiz Page -->        
+        <div data-role="page" id="quizPage">
+            <div id="quizHeader" data-role="header" data-position="fixed" data-id="exp-header">                
+                <h1 id="quizHeadline"></h1>
+            </div>
+            <div data-role="content" id="quizContent"></div>
+            <div id="expQuizFooter" data-role="footer" data-position="fixed" data-id="exp-footer"></div>
+        </div><!-- Quiz Page -->        
+        
+        
+        
+        <!-- Übersicht LocalStorage Inhalt -->        
         <div data-role="page" id="localStoragePage">
-            <div id="localStorageHeader" data-role="header" data-position="fixed">                
-                <h1 id="expDetailsHeadline"></h1>
-                <div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
-                <a href="#" class="headerFavButton" data-role="button" data-icon="star">Fav</a>
-                <a href="#" class="headerQrButton" data-role="button" data-icon="check">QR Scanner</a>
-                </div>
+            <div id="localStorageHeader" data-role="header" data-position="fixed">
+                <h1 id="expLocalStorageHeadline"></h1>
             </div>
             <div data-role="content" id="localStorageContent">
                 <p>Inhalte des LocalStorage:</p>
                 <a href="#" id="addLsButton" data-role="button" data-icon="check">zu LocalStorage hinzuf&uuml;gen</a>
                 <a href="#" id="delLsButton" data-role="button" data-icon="check">LocalStorage l&ouml;schen</a>
             </div>
-            <!--div id="localStorageFooter" data-role="footer" data-position="fixed">
-                <h4>Footer</h4>
-            </div-->
-        </div><!-- Übersicht LocalStorage Inhalt -->
+        </div><!-- Übersicht LocalStorage Inhalt -->	        
         
         
-        <!-- Quiz Page -->
-        <div data-role="page" id="quizPage">
-            <div id="quizHeader" data-role="header" data-position="fixed">                
-                <h1 id="quizHeadline">Quiz</h1>
-            </div>
-            <div data-role="content" id="quizContent">
-            </div>
-            <!--div id="quizFooter" data-role="footer" data-position="fixed">
-                <h4>Quiz Footer</h4>
-            </div-->
-        </div><!-- Quiz Page -->
+        <!-- Exp List Header Context Menu -->
+        <div data-role="panel" id="expListContextMenu" data-theme="b" data-display="overlay" data-position="right">
+            <div data-role="controlgroup" id="expListContextMenuControlgroup" data-corners="false"></div>
+        </div><!-- Exp List Header Context Menu -->
         
-	
-	   <!-- Popup Menu als Context Menu -->
-        <!--a href="#popupMenu" data-rel="popup" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-gear ui-btn-icon-left ui-btn-a">Actions...</a>
-        <div data-role="popup" id="popupMenu" data-theme="b">
-            <ul data-role="listview" data-inset="true" style="min-width:210px;">
-                <li data-role="list-divider">Choose an action</li>
-                <li><a href="#">als Favorit speichern</a></li>
-                <li><a href="#">LocalStorage</a></li>
-                <li><a href="#">QR Scanner</a></li>
-                <li><a href="#">Impressum</a></li>
-            </ul>
-        </div-->
+        <!-- Exp Details Header Context Menu -->
+        <div data-role="panel" id="expDetailsContextMenu" data-theme="b" data-display="overlay" data-position="right">
+            <div data-role="controlgroup" id="expDetailsContextMenuControlgroup" data-corners="false"></div>
+        </div><!-- Exp Details Header Context Menu -->
         
         
         <!-- Confirm Dialog -->
-        <div data-role="dialog" id="sure" data-title="Are you sure?">
+        <!--div data-role="dialog" id="sure" data-title="Are you sure?">
             <div data-role="content">
                 <h3 class="sure-1"></h3>
                 <p class="sure-2"></p>
                 <a href="#" class="sure-do" data-role="button" data-theme="b" data-rel="back">Yes</a>
                 <a href="#" class="sure-no" data-role="button" data-theme="c" data-rel="back">No</a>
             </div>
-        </div><!-- Confirm Dialog -->
+        </div--><!-- Confirm Dialog -->
     </body>
 
 </html>

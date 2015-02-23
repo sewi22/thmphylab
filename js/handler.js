@@ -1,11 +1,16 @@
-          
+    
+    // Init on start of application. Starts DB and creates the ExpLists      
     $(document).ready(function() {        
         db = window.openDatabase("ThmPhyLabDb", "", "DB for THM-PhyLab App", 1024*1024);
         createDBTables();
         fillExpTables();
-        fillQuestionTables();            
+        fillQuestionTables();                    
     });
 
+
+    $(function () {
+        $("[data-role=panel]").enhanceWithin().panel();
+    });
 
     // Decision if going back in history or exiting app by clicking the "Back Button"
     $(document).on("click", "backbutton", function(e){
@@ -16,7 +21,25 @@
         }
     }, false);
     
-
+    
+    $(document).on("click", "#expListContextMenuButton", function(event) {      
+        if( $(".ui-panel").hasClass("ui-panel-open") == true ){            
+            $("#expListContextMenu").panel("close");
+        }else{            
+            $("#expListContextMenu").panel("open");            
+        }                
+    });
+    
+    $(document).on("click", "#contextMenuBack", function(event) {                        
+        if( $(".ui-panel").hasClass("ui-panel-open") == true ){
+            $("#expListContextMenu").panel("close");
+        }else{
+            $("#expListContextMenu").panel("open");
+        }
+    });          
+    
+    
+    // Mark actual Exp as Favorite
     $(document).on("click", ".headerFavButton", function(){                
         // Experimente als Favorit markieren und Button entsprechend darstellen (Theme)
         expGroupNumber = localStorage.getItem("expGroupNumber");
@@ -47,63 +70,38 @@
         },function (error) {
             console.log("Scanning failed: ", error);
         });
-    });    
-
+    });
+    
 
 /*******************************************************************************************************************************************************/
     
-    // StartPage
+    // Create the StartPage Content
     $(document).on("pagebeforecreate", "#startPage", function(e){
         $("#startContent").html("<p>THM PhyLab</p><img src='css/images/start-loader.gif'/>");
     });
-    
-    
-    
-    // ExpList
-    $(document).on('pagecreate', '.expListPage', function(e) {
-        $(".ui-toolbar-back-btn").remove();
-        $('.expList').delegate("li a", "click", function (){
-            localStorage.setItem("expGroupNumber", $(this).jqmData('expgroupnumber'));
-            localStorage.setItem("expNumber", $(this).jqmData('expnumber'));
-        });
-    });
-    
-    
-    $(document).on( "swipeleft", "#expListAllPage", function(event) {
-        console.log("Swipe Right auf ListAll");
-        $.mobile.changePage("#expListFavPage", "fade");
-    });
-    
-    $(document).on( "swiperight", "#expListFavPage", function(event) {
-        console.log("Swipe Left auf ListFav");
-        $.mobile.changePage("#expListAllPage", "fade");
-    });    
-    
+      
         
-    $(document).on('pagecreate', '#expListAllPage', function(e) {
-        
-    });
-    
-    $(document).on('pagecreate', '#expListFavPage', function(e) {
-
-    });
-
-    
-    
     // DetailsPage
-    $(document).on('pagebeforeshow', '#expDetailsPage', function(e) {        
+    $(document).on('pagebeforeshow', '#expDetailsPage', function(e) {    
         var expGroupNumber = localStorage.getItem("expGroupNumber");
         var expNumber = localStorage.getItem("expNumber");
         
         getExp(expGroupNumber, expNumber, function(result){                        
-            var headline = result.expGroupNumber+"."+result.expNumber;            
-            $("#expDetailsHeadline").html(headline);
+            //var headline = result.expGroupNumber+"."+result.expNumber;            
+            //$("#expDetailsHeadline").html(headline);
             $("#expDetailsContent").html(result.expName);
-            $(".footerQuizButton").attr("data-expGroupNumber", expGroupNumber);
-            $(".footerQuizButton").attr("data-expNumber", expNumber);
-        });
+            //$(".footerQuizButton").attr("data-expGroupNumber", expGroupNumber);
+            //$(".footerQuizButton").attr("data-expNumber", expNumber);
+        });    
+    });
+    
+    $(document).on('pagecreate', '#expDetailsPage', function(e) {        
+        addExpFooterNavbar(e.target.id);
     });
 
+    $(document).on('pagecreate', '#quizPage', function(e) {        
+        addExpFooterNavbar(e.target.id);
+    });
 
 
     // LocalStoragePage
@@ -129,5 +127,41 @@
             localStorage.setItem("key"+text,"value"+text);
             $("#localStorageContent p").append(localStorage.key(localStorage.length-1)+ " : "+localStorage.getItem(localStorage.key(localStorage.length-1))+"<br/>");
         });
+    });
+    
+    
+    // Swipe on detailsPage to Left
+    $(document).on('swipeleft', '#expDetailsPage', function(event) {
+        var next = '#' + $.mobile.activePage.next('[data-role=page]')[0].id;
+        if(event.handled !== true){
+            $(':mobile-pagecontainer').pagecontainer('change', next, {transition: 'slide', reverse: false});
+            event.handled = true;
+        }
+        return false;
+    });
+
+    // Swipe on expListFavPage to Right
+    $(document).on('swiperight', '#quizPage', function(event) {
+                
+        var prev = '#' + $.mobile.activePage.prev('[data-role=page]')[0].id;                
+        if(event.handled !== true){
+            $(':mobile-pagecontainer').pagecontainer('change', prev, {transition: 'slide', reverse: true});
+            event.handled = true;
+        }
+        return false;
+    });
+    
+    // Click on Quiz Tab
+    $(document).on('click', '#footerNavbarItemQuiz', function(event){
+        if(!$(this).hasClass('ui-state-persist')){
+            $(':mobile-pagecontainer').pagecontainer('change', '#quizPage', {transition: 'slide', reverse: false});
+        }
+    });
+    
+    // Click on Details Tab
+    $(document).on('click', '#footerNavbarItemDetails', function(event){
+        if(!$(this).hasClass('ui-state-persist')){
+            $(':mobile-pagecontainer').pagecontainer('change', '#expDetailsPage', {transition: 'slide', reverse: true});
+        }
     });
         

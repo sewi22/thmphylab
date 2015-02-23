@@ -15,25 +15,24 @@
  * 
  ******************/
 
-
-.rightanswer{
+ .rightanswer{
     background-color : #00FF00 !important;   
-}
+ }
 
-.wronganswer{
+ .wronganswer{
     background-color : #FF0000 !important;
-}
+ }
 
-.otheranswer{
+ .otheranswer{
     background-color : #0000FF !important;
-}
+ }
 
-#startPage{
+ #startPage{
     background-color: #80BA24;    
     position: relative;
-}
+ }
 
-#startContent{
+ #startContent{
     color: #FFFFFF;
     font-family: Arial;
     font-size: xx-large;
@@ -47,6 +46,11 @@
     width: 50%;
     height: 50%;
     margin: auto;   
-}
+ }
 
-
+ .ui-panel-inner {
+    padding:0px;
+ }
+ .ui-controlgroup {
+    margin:0;
+ }

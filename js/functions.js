@@ -1,56 +1,42 @@
+    
+    function addExpListContextMenu(page){        
+        $('#'+page+' [data-role="header"]').append('<a id="expListContextMenuButton" data-role="button" data-icon="bars" class="ui-btn-right" style="margin-top:-5px;" href="#myPanel">Menü</a>').trigger("create");
+    }
+    
+    function fillExpListContextMenu(){
+        var links = "";
 
-    function createExpListAll(){    
-        getExpGroups(function (expGroups){            
-            for(var i=0; i<expGroups.length; i++) {
-                (function(i){                                                        
-                    var expGroup = expGroups.item(i);                    
-                    $('#expListAll').append('<div data-role="collapsible"><h3>'+ expGroup.expGroupName + '</h3><ul id="list'+expGroup.expGroupNumber+'" class="expList" data-role="listview"></ul></div>').enhanceWithin();
-                    getAllExpFromGroup(expGroup.expGroupNumber, function (res){
-                        for(var e=0; e<res.length; e++){                                                                                                    
-                            var exp = res.item(e);
-                            if(exp.expIsActive == 1){                                                               
-                                $('#list'+expGroup.expGroupNumber).append('<li><a href="#expDetailsPage" data-expGroupNumber="'+expGroup.expGroupNumber+'" data-expNumber="'+exp.expNumber+'" data-transition="slide">'+ expGroup.expGroupNumber + '.' + exp.expNumber + ' ' + exp.expName + '</a></li>');                                                                                                
-                            } else {                                    
-                                $('#list'+expGroup.expGroupNumber).append('<li>'+ expGroup.expGroupNumber + '.' +exp.expNumber + ' ' + exp.expName + '</li>');                                                                                                                                
-                            }                                                                                           
-                        };
-                        if(i == expGroups.length-1){
-                            $('ul[data-role=listview]').listview('refresh');
-                            $.mobile.changePage("#expListAllPage", "fade");                                
-                        }                                                
-                    });
-                })(i);                        
-            }             
-        });        
+        links += '<a href="#" id="contextMenuBack" data-theme="a" data-role="button">zurück</a>';
+        links += '<a href="#" data-role="button">als Favorit</a>';
+        links += '<a href="#localStoragePage" data-role="button">LocalStorage</a>';
+        links += '<a href="#" data-role="button">QR Reader</a>';
+        links += '<a href="#" data-role="button">Impressum</a>';
+
+
+        $('#expListContextMenuControlgroup').controlgroup("container").append(links);
+        $('#expListContextMenuControlgroup').enhanceWithin().controlgroup('refresh');    
     }
     
-    function createExpListFav(){
-        getFavExp(function (res){
-            for(var e=0; e<res.length; e++){
-                var exp = res.item(e);
-                if(exp.expIsActive == 1){
-                    $('#expListFav').append('<li><a href="#expDetailsPage" data-expGroupNumber="'+exp.expGroupNumber+'" data-expNumber="'+exp.expNumber+'" data-transition="slide">'+ exp.expGroupNumber + '.' + exp.expNumber + ' ' + exp.expName + '</a></li>');
-                } else {
-                    $('#list'+expGroup.expGroupNumber).append('<li>'+ expGroup.expGroupNumber + '.' +exp.expNumber + ' ' + exp.expName + '</li>');
-                }
-            };
-            if(e == res.length-1){
-                $('ul[data-role=listview]').listview('refresh');
-                //$.mobile.changePage("#expListPage", "fade");
-            }
-        });    
-                        
+    
+    function addExpDetailsContextMenu(page){
+        //$('#'+page+' [data-role="header"]').append('<a id="expDetailsContextMenuButton" data-role="button" data-icon="bars" class="ui-btn-right" style="margin-top:-5px;" href="#myPanel">Menü</a>').trigger("create");
     }
     
-    /*
-    function createConfirmDialog(header, description, yes, no, callback) {
-        $("#sure .sure-1").text(header);
-        $("#sure .sure-2").text(description);
-        $("#sure .sure-no").text(no);
-        $("#sure .sure-do").text(yes).on("click.sure", function() {
-            callback();
-            $(this).off("click.sure");
-        });
-        $.mobile.changePage("#sure");
+    function fillExpDetailsContextMenu(){
+
     }
-    */    
+    
+    function addExpFooterNavbar(page){
+        var navbar, navbarId, footerId, addClassAll, addClassFav = "";
+        if (page == "expDetailsPage"){       
+            navbarId = "#expDetailsNavbar"; footerId = "#expDetailsFooter";
+            classDetails = ' class="ui-btn-active ui-state-persist"';
+            classQuiz = '';        
+        } else if (page == "quizPage"){        
+            navbarId = "#expQuizNavbar"; footerId = "#expQuizFooter";
+            classDetails = '';
+            classQuiz = ' class="ui-btn-active ui-state-persist"';        
+        }
+        var myNavbar = $('<div id="'+navbarId+'" class="footerNavbar" data-role="navbar" data-iconpos="bottom"><ul><li><a id="footerNavbarItemDetails" href="#expDetailsPage" data-theme="b" data-icon="grid"'+classDetails+'>Details</a></li><li><a id="footerNavbarItemQuiz" href="#quizPage" data-theme="b" data-icon="star"'+classQuiz+'>Quiz</a></li></ul></div>').appendTo(footerId);               
+        $(footerId).append(navbar).trigger('create');
+    }

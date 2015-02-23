@@ -1,8 +1,8 @@
 
-    // QuizPage
+    // Create QuizPage before show
     $(document).on('pagebeforeshow', '#quizPage', function(e) {
         var expGroupNumber = localStorage.getItem("expGroupNumber");
-        var expNumber = localStorage.getItem("expNumber");
+        var expNumber = localStorage.getItem("expNumber");                
         $("#quizContent").empty();
         getQuizQuestions(expGroupNumber, expNumber, function(questions){
 
@@ -161,19 +161,19 @@
                     console.log("Unbekannter Quiztyp!");
                 }
             }
-        });
+        });        
     });       
     
+    
+    /* 
     $(document).on('pageload', '#quizPage', function(e) {
         console.log($("#quizResultList"));
         console.log("Anzahl richtige Antworten: "+$(".rightanswer").length);
         console.log($("#quizResultList").length);
     });
+    */
 
-
-/*****************************************************************************************************************************************************/
-    //Button Click Event Handler
-
+    // Auswertung einer Frage bei Click n quizCheckButton
     $(document).on("click", "#quizCheckButton", function(){
 
         var quiztype = $("#quizCheckButton").attr("data-questiontype");
@@ -302,10 +302,13 @@
         }
     });
 
+
+    // Click on quizNextButton
     $(document).on("click", "#quizNextButton", function(){
         $('#quizPage').trigger('pagebeforeshow');
     });
 
+    // Reset der beantworteten Fragen in der DB
     $(document).on("click", "#quizResetButton", function(){
 
         // TODO: Confirm Dialog ändern. Bisheriger Dialog ruft jedoch mehrfach den Trigger "pagebeforeshow" auf.
